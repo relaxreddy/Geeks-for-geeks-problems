@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<string> result;
+
+    void generateSubsequences(string s, string curr, int index) {
+        if (index == s.length()) {
+            if (!curr.empty()) {
+                result.push_back(curr);
+            }
+            return;
+        }
+        // Exclude current character
+        generateSubsequences(s, curr, index + 1);
+        // Include current character
+        generateSubsequences(s, curr + s[index], index + 1);
+    }
+
+    vector<string> AllPossibleStrings(string s) {
+        generateSubsequences(s, "", 0);
+        // Sort the result in lexicographically-sorted order
+        sort(result.begin(), result.end());
+        return result;
+    }
+};
